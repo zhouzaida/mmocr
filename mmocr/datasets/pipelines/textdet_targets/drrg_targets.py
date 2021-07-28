@@ -1,12 +1,16 @@
 import cv2
 import numpy as np
-from lanms import merge_quadrangle_n9 as la_nms
 from mmdet.core import BitmapMasks
 from mmdet.datasets.builder import PIPELINES
 from numpy.linalg import norm
 
 import mmocr.utils.check_argument as check_argument
 from .textsnake_targets import TextSnakeTargets
+
+try:
+    from lanms import merge_quadrangle_n9 as la_nms
+except ImportError:
+    raise ImportError('lanms-proper is unavailable on non-Linux platforms.')
 
 
 @PIPELINES.register_module()
